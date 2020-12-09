@@ -52,6 +52,7 @@ We perform our experiments in 'vcoco' and 'hico(v2016)' dataset. We follow the s
 Considering that the body part regions data is too large(>100GB for test and >500GB for training) while the code runs fast, we provide prepared dataset except human body part regions:
 - [vcoco](https://drive.google.com/file/d/1NlyrqhtYUlQCkLXJzM036AqCeo8aVjs9/view?usp=sharing): https://drive.google.com/file/d/1NlyrqhtYUlQCkLXJzM036AqCeo8aVjs9/view?usp=sharing
 - [hico](https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing): https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing
+
 You can download the datasets and extract them to './data/hico/' and './data/vcoco/' respectively.
 #### 2. Calculate Human Body Part Regions
 We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './WSHP', you can run it following these steps:
