@@ -93,6 +93,18 @@ If you don't want to wait for test, we also provide our pre-computed results in 
 You can download and extract them to './output/hico_full/' and './output/vcoco_full/' respectively.
 
 ## Quick Start
+#### Demo
+You can simply run
+```python
+python demo_vcoco.py
+```
+To visualize the result of an random selected image.
+You can also custom 'im_id' param to select a specific image to visualize, or 'show_category' param to select whether to show interaction and object categories or not.
+The complete script is as follows:
+```python
+python demo_vcoco.py --im_id <int> --show_category <True | False>
+```
+
 #### Training
 Before custom your own training progress, you have to download a pretrained weights to initialize the model([VGG16](https://www.dropbox.com/s/s3brpk0bdq60nyb/vgg16_caffe.pth?dl=0) or [ResNet101](https://www.dropbox.com/s/iev3tkbz5wyyuz9/resnet101_caffe.pth?dl=0)), and put it into './data/pretrained_model/'.
 You can train you own model by running the following script:  
