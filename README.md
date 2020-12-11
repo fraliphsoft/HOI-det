@@ -37,6 +37,10 @@ conda activate <env-name>
 ```
 pip install -r requirements.txt
 ```
+#### Install Matlab
+We adopt the implementation of evaluation functions in HICO dataset from [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network)(actually from [iCAN](https://github.com/vt-vl-lab/iCAN) or former), so matlab runtime environment is needed.
+There are no restrictions on versions, you can download matlab from its official website and install according to the tutorial.
+
 #### Install Libraries
 ```
 1. cd ./lib/
