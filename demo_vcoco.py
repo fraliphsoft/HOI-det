@@ -10,10 +10,7 @@ import matplotlib.pyplot as plt
 
 DATA_ROOT = r'data/vcoco/images/test/'
 OUTPUT = r'output/vcoco_full/all_hoi_detections.pkl'
-
-vrb2ind_path = 'data/vcoco/action_index.json'
-obj2ind_path = 'data/vcoco/coco_object_classes.json'
-obj_list_path = 'data/vcoco/object_index.json'
+# obj_list_path = 'data/vcoco/object_index.json'
 
 def parse_args():
   """
@@ -25,11 +22,11 @@ def parse_args():
                       default='185197', type=int)
   parser.add_argument('--show_category',
                       help='whether to show category of objects',
-                      default=False)
+                      default=True)
   args = parser.parse_args()
   return args
 
-def show_boxes(im_path, hbox, oboxes, cls, colors=None, show_text=False):
+def show_boxes(im_path, hbox, oboxes, actions, colors=None, show_text=False):
     """Draw detected bounding boxes."""
     if colors is None:
         colors = ['red' for _ in range(len(oboxes))]
@@ -51,10 +48,10 @@ def show_boxes(im_path, hbox, oboxes, cls, colors=None, show_text=False):
                           edgecolor=colors[i % len(colors)], linewidth=1.5)
         )
         if show_text:
-            ax.text(bbox[0], bbox[1] - 2,
-                    '{}'.format(cls[i]),
-                    bbox=dict(facecolor=colors[i % len(colors)], alpha=0.5),
-                    fontsize=14, color='white')
+            ax.text(5, 30 * i + 15,
+                    '{}'.format(actions[i]),
+                    bbox=dict(facecolor='red', alpha=0.5),
+                    fontsize=14, color=colors[i % len(colors)])
         plt.axis('off')
         plt.tight_layout()
     plt.show()
@@ -69,16 +66,16 @@ def load_verbs(verb2index_path):
 
 def load_objects(object2index_path):
     with open(object2index_path) as f:
-        obj2ind = json.load(f)
-        obj_classes = [0] * len(obj2ind)
-        for obj, ind in obj2ind.items():
-            obj_classes[ind] = obj
-    return obj_classes
-
-def load_objects1(object_list_path):
-    with open(object_list_path) as f:
         obj_classes = f.readlines()
     return obj_classes
+
+# def load_objects(object2index_path):
+#     with open(object2index_path) as f:
+#         obj2ind = json.load(f)
+#         obj_classes = [0] * len(obj2ind)
+#         for obj, ind in obj2ind.items():
+#             obj_classes[ind] = obj
+#     return obj_classes
 
 def show_img(im_id, show_category=False):
     image_template = 'COCO_val2014_%s.jpg'
@@ -96,14 +93,14 @@ def show_img(im_id, show_category=False):
             vrb_inds = np.argmax(image_info['action_score'], axis=1)
             obj_inds = image_info['object_class']
 
-            vrb_classes = load_verbs(vrb2ind_path)
-            obj_classes = load_objects1(obj_list_path)
+            vrb_classes = load_verbs('data/vcoco/action_index.json')
+            obj_classes = load_objects('data/vcoco/coco_object_list.txt')
 
             actions = []
             for i in range(len(vrb_inds)):
-                actions.append(vrb_classes[vrb_inds[i]] + ', ' + obj_classes[obj_inds[i]])
+                actions.append([vrb_classes[vrb_inds[i]], obj_classes[obj_inds[i]]])
 
-            show_boxes(im_path, hbox, oboxes, actions, ['blue', 'green', 'purple'], show_category)
+            show_boxes(im_path, hbox, oboxes, actions, ['blue', 'green', 'purple', 'yellow', 'black'], show_category)
 
 
 if __name__ == '__main__':
