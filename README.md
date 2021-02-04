@@ -44,10 +44,9 @@ There are no restrictions on versions, you can download matlab from its official
 #### Install Libraries
 ```
 1. cd ./lib/
-2. python setup.py
-3. sh make.sh # if there is already './lib/pycocotools/_mask.so' exsits, delete it before step 3
-4. cd ./model/nms
-5. sh make.sh
+2. sh make.sh # if there is already './lib/pycocotools/_mask.so' exsits, delete it before step 3
+3. cd ./model/nms
+4. sh make.sh
 ```
 
 ## Prepare Data
