@@ -73,7 +73,7 @@ We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './W
 
 ## Pretrained Model
 You can download some pretrained models from:
-- for [WSHP](https://jbox.sjtu.edu.cn/l/hJjgjw): https://jbox.sjtu.edu.cn/l/hJjgjw
+- for [WSHP](https://doi.org/10.5281/zenodo.4506593): https://doi.org/10.5281/zenodo.4506593 or https://jbox.sjtu.edu.cn/l/hJjgjw
 - for [hico](https://drive.google.com/file/d/1EoysCjafsRiY_Anw6f0kJIkp1KWcl0j7/view?usp=sharing): https://drive.google.com/file/d/1EoysCjafsRiY_Anw6f0kJIkp1KWcl0j7/view?usp=sharing
 - for [vcoco](https://drive.google.com/file/d/1kBLOF3qj5SGEOZHh0HjCWtLSZGiPDlzJ/view?usp=sharing): https://drive.google.com/file/d/1kBLOF3qj5SGEOZHh0HjCWtLSZGiPDlzJ/view?usp=sharing
 
@@ -127,7 +127,7 @@ If you have already downloaded the pre-computed test results, the detection stag
 
 ## Link
 - We construct our code based on [Faster-RCNN](https://github.com/jwyang/faster-rcnn.pytorch)(https://github.com/jwyang/faster-rcnn.pytorch), and follow [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network)(https://github.com/jwyang/faster-rcnn.pytorch) to build our evaluation code.
-- We use [WSHP](https://github.com/MVIG-SJTU/WSHP)(https://github.com/MVIG-SJTU/WSHP) to parse human body part regions, and use its pre-trained weights [here](https://jbox.sjtu.edu.cn/l/hJjgjw)(https://jbox.sjtu.edu.cn/l/hJjgjw).
+- We use [WSHP](https://github.com/MVIG-SJTU/WSHP)(https://github.com/MVIG-SJTU/WSHP) to parse human body part regions, and use its pre-trained weights [here](https://doi.org/10.5281/zenodo.4506593)(https://doi.org/10.5281/zenodo.4506593 or https://jbox.sjtu.edu.cn/l/hJjgjw).
 - We provide the two datasets we used in our experiments as:
 [hico](https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing): https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing
 [vcoco](https://drive.google.com/file/d/1NlyrqhtYUlQCkLXJzM036AqCeo8aVjs9/view?usp=sharing): https://drive.google.com/file/d/1NlyrqhtYUlQCkLXJzM036AqCeo8aVjs9/view?usp=sharing
