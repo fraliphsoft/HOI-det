@@ -140,17 +140,17 @@ If you have already downloaded the pre-computed test results, the detection stag
 - If you want to custom the training, you can achieve the pretrained model for two avalable backbones:
 
 VGG16: 
-
+<br>
 	[Dropbox](https://www.dropbox.com/s/s3brpk0bdq60nyb/vgg16_caffe.pth?dl=0): https://www.dropbox.com/s/s3brpk0bdq60nyb/vgg16_caffe.pth?dl=0
-	
+<br>
 	[VT Server](https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/vgg16_caffe.pth): https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/vgg16_caffe.pth
-	
+<br>
 ResNet101: 
-
+<br>
 	[Dropbox](https://www.dropbox.com/s/iev3tkbz5wyyuz9/resnet101_caffe.pth?dl=0): https://www.dropbox.com/s/iev3tkbz5wyyuz9/resnet101_caffe.pth?dl=0
-	
+<br>
 	[VT Server](https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/resnet101_caffe.pth): https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/resnet101_caffe.pth
-	
+<br>
 	[Zenodo](https://doi.org/10.5281/zenodo.4513878): https://doi.org/10.5281/zenodo.4513878
 
 ## Citation
