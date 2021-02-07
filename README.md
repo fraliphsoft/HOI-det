@@ -105,7 +105,7 @@ python demo_vcoco.py --im_id <int> --show_category <True | False>
 ```
 
 #### Training
-Before custom your own training progress, you have to download a pretrained weights to initialize the model([VGG16](https://www.dropbox.com/s/s3brpk0bdq60nyb/vgg16_caffe.pth?dl=0) or [ResNet101](https://www.dropbox.com/s/iev3tkbz5wyyuz9/resnet101_caffe.pth?dl=0)), and put it into './data/pretrained_model/'.
+Before custom your own training progress, you have to download a pretrained weights to initialize the model([VGG16](https://doi.org/10.5281/zenodo.4515251) or [ResNet101](https://doi.org/10.5281/zenodo.4513878)), and put it into './data/pretrained_model/'.
 You can train you own model by running the following script:  
 ```python
 python trainval_net.py −−dataset hico_full −−checkepoch 6 --checkpoint 91451
@@ -144,6 +144,8 @@ VGG16:
 	[Dropbox](https://www.dropbox.com/s/s3brpk0bdq60nyb/vgg16_caffe.pth?dl=0): https://www.dropbox.com/s/s3brpk0bdq60nyb/vgg16_caffe.pth?dl=0
 <br>
 	[VT Server](https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/vgg16_caffe.pth): https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/vgg16_caffe.pth
+<br>
+	[Zenodo](https://doi.org/10.5281/zenodo.4515251): https://doi.org/10.5281/zenodo.4515251
 <br>
 ResNet101: 
 <br>
