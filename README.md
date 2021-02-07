@@ -74,7 +74,7 @@ We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './W
 ## Pretrained Model
 You can download some pretrained models from:
 - for [WSHP](https://doi.org/10.5281/zenodo.4506593): https://doi.org/10.5281/zenodo.4506593 or https://jbox.sjtu.edu.cn/l/hJjgjw
-- for [hico](https://drive.google.com/file/d/1EoysCjafsRiY_Anw6f0kJIkp1KWcl0j7/view?usp=sharing): https://drive.google.com/file/d/1EoysCjafsRiY_Anw6f0kJIkp1KWcl0j7/view?usp=sharing
+- for [hico](https://doi.org/10.5281/zenodo.4513884): https://doi.org/10.5281/zenodo.4513884
 - for [vcoco](https://drive.google.com/file/d/1kBLOF3qj5SGEOZHh0HjCWtLSZGiPDlzJ/view?usp=sharing): https://drive.google.com/file/d/1kBLOF3qj5SGEOZHh0HjCWtLSZGiPDlzJ/view?usp=sharing
 
 After that, you should extract them respectively in:
@@ -132,7 +132,7 @@ If you have already downloaded the pre-computed test results, the detection stag
 [hico](https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing): https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing
 [vcoco](https://drive.google.com/file/d/1NlyrqhtYUlQCkLXJzM036AqCeo8aVjs9/view?usp=sharing): https://drive.google.com/file/d/1NlyrqhtYUlQCkLXJzM036AqCeo8aVjs9/view?usp=sharing
 - We provide our pre-trained weights as:
-[for hico](https://drive.google.com/file/d/1EoysCjafsRiY_Anw6f0kJIkp1KWcl0j7/view?usp=sharing): https://drive.google.com/file/d/1EoysCjafsRiY_Anw6f0kJIkp1KWcl0j7/view?usp=sharing
+[for hico](https://doi.org/10.5281/zenodo.4513884): https://doi.org/10.5281/zenodo.4513884
 [for vcoco](https://drive.google.com/file/d/1kBLOF3qj5SGEOZHh0HjCWtLSZGiPDlzJ/view?usp=sharing): https://drive.google.com/file/d/1kBLOF3qj5SGEOZHh0HjCWtLSZGiPDlzJ/view?usp=sharing
 - We provide our pre-computed results for fast evaluation as:
 [for hico](https://drive.google.com/file/d/1WRlXxVp-4cfnGCxfHEn1LGVrrA7kBJxn/view?usp=sharing): https://drive.google.com/file/d/1WRlXxVp-4cfnGCxfHEn1LGVrrA7kBJxn/view?usp=sharing
