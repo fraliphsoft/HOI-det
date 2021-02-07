@@ -80,7 +80,7 @@ You can download some pretrained models from:
 After that, you should extract them respectively in:
 - for WSHP: './WSHP/parsing_network/models/'
 - for hico: './weights/res101/hico_full/'
-- for vcoco: './weights/res101/hico_full/'
+- for vcoco: './weights/res101/vcoco_full/'
 
 Note: The pretrained model for vcoco provided here performs better than that in our paper, while we just increase some training epoches.
 
