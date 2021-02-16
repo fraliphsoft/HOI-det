@@ -92,18 +92,6 @@ If you don't want to wait for test, we also provide our pre-computed results in 
 You can download and extract them to './output/hico_full/' and './output/vcoco_full/' respectively.
 
 ## Quick Start
-#### Demo
-You can simply run
-```python
-python demo_vcoco.py
-```
-To visualize the result of an random selected image.
-You can also custom 'im_id' param to select a specific image to visualize, or 'show_category' param to select whether to show interaction and object categories or not.
-The complete script is as follows:
-```python
-python demo_vcoco.py --im_id <int> --show_category <True | False>
-```
-
 #### Training
 Before custom your own training progress, you have to download a pretrained weights to initialize the model([VGG16](https://doi.org/10.5281/zenodo.4515251) or [ResNet101](https://doi.org/10.5281/zenodo.4513878)), and put it into './data/pretrained_model/'.
 You can train you own model by running the following script:  
@@ -124,6 +112,17 @@ or
 python test_net_vcoco.py
 ```
 If you have already downloaded the pre-computed test results, the detection stage will be automaticly skipped, and the test results will be evaluated.
+
+#### Demo
+After generating the test results, You can simply run scripts below to visualize the result of an random selected image.
+```python
+python demo_vcoco.py
+```
+You can also custom 'im_id' param to select a specific image to visualize, or 'show_category' param to select whether to show interaction and object categories or not.
+The complete script is as follows:
+```python
+python demo_vcoco.py --im_id <int> --show_category <True | False>
+```
 
 ## Link
 - We construct our code based on [Faster-RCNN](https://github.com/jwyang/faster-rcnn.pytorch)(https://github.com/jwyang/faster-rcnn.pytorch), and follow [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network)(https://github.com/jwyang/faster-rcnn.pytorch) to build our evaluation code.
