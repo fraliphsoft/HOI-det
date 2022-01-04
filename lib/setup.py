@@ -6,10 +6,11 @@ import os
 
 import torch
 from setuptools import find_packages
-from setuptools import setup
+from setuptools import setup, Extension
 from torch.utils.cpp_extension import CUDA_HOME
 from torch.utils.cpp_extension import CppExtension
 from torch.utils.cpp_extension import CUDAExtension
+import numpy as np
 
 requirements = ["torch", "torchvision"]
 
@@ -50,6 +51,18 @@ def get_extensions():
             include_dirs=include_dirs,
             define_macros=define_macros,
             extra_compile_args=extra_compile_args,
+        ),
+        Extension(
+            'pycocotools._mask',
+            sources=['pycocotools/maskApi.c', 'pycocotools/_mask.pyx'],
+            include_dirs = [np.get_include(), 'pycocotools'],
+            extra_compile_args=['-Wno-cpp', '-Wno-unused-function', '-std=c99'],
+        ),
+        extension(
+            "model.utils.cython_bbox",
+            ["model/utils/bbox.pyx"],
+            extra_compile_args={'gcc': ["-Wno-cpp", "-Wno-unused-function"]},
+            include_dirs=[np.get_include()]
         )
     ]
 

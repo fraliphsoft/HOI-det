@@ -22,7 +22,7 @@ Cython==0.29.26
 easydict==1.9
 kiwisolver==1.3.2
 matplotlib==3.5.1
-numpy==1.21.5
+numpy==1.19.2
 opencv-python==4.5.5.62
 Pillow==8.4.0
 protobuf==3.19.1
@@ -31,12 +31,13 @@ pyparsing==3.0.6
 python-dateutil==2.8.2
 PyYAML==6.0
 scipy==1.6.2
-six==1.16.0
+six==1.15.0
 tensorboardX==2.4.1
 tensorflow-gpu==2.6.0
 torch==1.9.0+cu111
 torchvision==0.10.0+cu111
 tqdm==4.62.3
+tf_slim==1.1.0
 imageio==2.13.5
 
 ## Installation
@@ -51,8 +52,9 @@ conda activate <env-name>
 
 ```
 pip install -r requirements.txt
-# maybe need to install torch from pytorch.org, using the command below
+# for cuda environment problems, you maybe need to install spercific version of tensorflow or torch, using the command below
 # pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+# conda install tensorflow-gpu==2.6.0
 
 ```
 
@@ -66,6 +68,10 @@ There are no restrictions on versions, you can download matlab from its official
 ```
 1. cd ./lib/
 2. pip install -e .
+# then there should be some file like
+#   /lib/pycocotools/_mask.cpython-38-x86_64-linux-gnu.so
+#   /lib/model/_C.cpython-38-x86_64-linux-gnu.so
+#   /lib/model/utils/cython_bbox.cpython-38-x86_64-linux-gnu.so
 ```
 
 Note that the compilation process of 'master' branch and this 'pytorch1.x' branch is totally different, thus it is not recommended that the two branches share a same local directory path.
@@ -99,12 +105,12 @@ We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './W
 1. # download pretrained-model for WSHP and then extract to './WSHP/parsing_network/models/'.
 2. cd ./WSHP/parsing_network/
 3. rm filename.txt
-4. # config the dataset path in 'generate_flist.sh' (in line 3 - 6)
+4. # config the dataset path in 'generate_flist.sh' (in line 3 - 7)
 5. chmod +x generate_flist.sh
 6. sh generate_flist.sh
-7. # config the dataset path in 'inference.py' (in line 30 - 33)
+7. # config the dataset path in 'inference.py' (in line 29 - 42)
 8. python inference.py
-9. # move the output from './WSHP/parsing_network/output/' to './data/hico/humans/' or './data/vcoco/humans/'
+9. # if using the default path, move the output from './WSHP/parsing_network/output/' to './data/hico/humans/' or './data/vcoco/humans/'
 ```
 
 ## Pretrained Model
