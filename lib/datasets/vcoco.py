@@ -92,8 +92,8 @@ class vcoco(imdb):
     @staticmethod
     def load_obj2vec(data_path):
         obj2vec_path = os.path.join(data_path, 'obj2vec.pkl')
-        with open(obj2vec_path) as f:
-            obj2vec = pickle.load(f)
+        with open(obj2vec_path, 'rb') as f:
+            obj2vec = pickle.load(f, encoding='iso-8859-1')
         return obj2vec
 
     @staticmethod
@@ -159,8 +159,8 @@ class vcoco(imdb):
     def obj2vec(self):
         if self._obj2vec is None:
             obj2vec_path = os.path.join(self._data_path, 'obj2vec.pkl')
-            with open(obj2vec_path) as f:
-                obj2vec = pickle.load(f)
+            with open(obj2vec_path, 'rb') as f:
+                obj2vec = pickle.load(f, encoding='iso-8859-1')
                 self._obj2vec = obj2vec
         return self._obj2vec
 
@@ -223,8 +223,8 @@ class vcoco(imdb):
         image_set_info_path = os.path.join(self._data_path, 'image_set_info.pkl')
         if os.path.exists(image_set_info_path):
             print(image_set_info_path + ' is found!')
-            with open(image_set_info_path) as f:
-                all_image_info = pickle.load(f)
+            with open(image_set_info_path, 'rb') as f:
+                all_image_info = pickle.load(f, encoding='iso-8859-1')
         else:
             all_image_info = {}
             image_root = os.path.join(self._data_path, 'images', self._image_set)
@@ -249,7 +249,7 @@ class vcoco(imdb):
         cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
         if os.path.exists(cache_file):
             with open(cache_file, 'rb') as fid:
-                gt_roidb_dict = pickle.load(fid)
+                gt_roidb_dict = pickle.load(fid, encoding='iso-8859-1')
             print('{} gt roidb loaded from {}'.format(self.name, cache_file))
             return gt_roidb_dict
 
@@ -349,8 +349,8 @@ class vcoco(imdb):
         all_annos = {}
 
         print('Loading annotations ...')
-        anno_ng_db = pickle.load(open(os.path.join(self._data_path, '%s_NG_VCOCO_with_pose.pkl' % self._image_set)))
-        anno_gt_tmp = pickle.load(open(os.path.join(self._data_path, '%s_GT_VCOCO_with_pose.pkl' % self._image_set)))
+        anno_ng_db = pickle.load(open(os.path.join(self._data_path, '%s_NG_VCOCO_with_pose.pkl' % self._image_set), 'rb'), encoding='iso-8859-1')
+        anno_gt_tmp = pickle.load(open(os.path.join(self._data_path, '%s_GT_VCOCO_with_pose.pkl' % self._image_set), 'rb'), encoding='iso-8859-1')
 
         print('Processing annotations ...')
         anno_gt_db = {}

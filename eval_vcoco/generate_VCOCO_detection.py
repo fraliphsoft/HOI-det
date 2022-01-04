@@ -223,9 +223,9 @@ def generate_pkl(test_result, prior_mask, Action_dic_inv, prior_flag=3):
 
 def generate_VCOCO_detection_and_eval(data_root, output_root, all_results):
 
-    prior_mask = pickle.load(open(data_root + '/' + 'prior_mask.pkl', "rb"))
+    prior_mask = pickle.load(open(data_root + '/' + 'prior_mask.pkl', "rb"), encoding='iso-8859-1')
     Action_dic = json.load(open(data_root + '/' + 'action_index.json'))
-    Action_dic_inv = {y: x for x, y in Action_dic.iteritems()}
+    Action_dic_inv = {y: x for x, y in Action_dic.items()}
 
     vcocoeval = VCOCOeval(data_root + '/' + 'annotations/vcoco_test.json',
                           data_root + '/' + 'annotations/instances_vcoco_all_2014.json',

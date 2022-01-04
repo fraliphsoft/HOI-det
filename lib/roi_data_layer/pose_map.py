@@ -219,8 +219,8 @@ def show_boxes(im_path, dets, cls=None, colors=None):
 
 if __name__ == '__main__':
     anno_path = '../../data/hico/train_GT_HICO_with_pose.pkl'
-    with open(anno_path) as f:
-        anno_db = pickle.load(f)
+    with open(anno_path, 'rb') as f:
+        anno_db = pickle.load(f, encoding='iso-8859-1')
 
     img_path_template = '../../data/hico/images/train2015/HICO_train2015_%s.jpg'
     for ins_anno in anno_db:

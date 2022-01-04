@@ -32,6 +32,9 @@ from model.utils.net_utils import weights_normal_init, save_net, load_net, \
 
 from model.faster_rcnn.vgg16 import vgg16
 from model.faster_rcnn.resnet import resnet
+from tqdm import tqdm
+import json
+import copy
 
 
 def parse_args():
@@ -41,10 +44,12 @@ def parse_args():
   parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
   parser.add_argument('--dataset', dest='dataset',
                       help='training dataset',
-                      default='vcoco_full', type=str)
+                      default='hico_full', type=str, choices=['vcoco_full', 'hico_full'])
+  parser.add_argument('--data_dir', dest='DATA_DIR',
+                      default='data', type=str)
   parser.add_argument('--net', dest='net',
                       help='vgg16, res101',
-                      default='res101', type=str)
+                      default='res101', type=str, choices=['vgg16', 'res101'])
   parser.add_argument('--start_epoch', dest='start_epoch',
                       help='starting epoch',
                       default=1, type=int)
@@ -87,7 +92,7 @@ def parse_args():
                       default="sgd", type=str)
   parser.add_argument('--lr', dest='lr',
                       help='starting learning rate',
-                      default=0.00001, type=float)
+                      default=1e-5, type=float)
   parser.add_argument('--lr_decay_step', dest='lr_decay_step',
                       help='step to do learning rate decay, unit is epoch',
                       default=1, type=int)  # hico-1, vcoco-3
@@ -98,7 +103,7 @@ def parse_args():
 # set training session
   parser.add_argument('--s', dest='session',
                       help='training session',
-                      default=1, type=int)
+                      default=time.strftime('%Y-%m-%d-%H-%M-%S',time.localtime(time.time())), type=str)
 
 # resume trained model
   parser.add_argument('--r', dest='resume',
@@ -113,6 +118,7 @@ def parse_args():
   parser.add_argument('--checkpoint', dest='checkpoint',
                       help='checkpoint to load model',
                       default=91451, type=int)
+                      # default=10051, type=int)
 # log and display
   parser.add_argument('--use_tfb', dest='use_tfboard',
                       help='whether use tensorboard',
@@ -156,6 +162,7 @@ if __name__ == '__main__':
   print('Called with args:')
   print(args)
 
+  cfg.DATA_DIR = args.DATA_DIR
 
   if args.dataset == "hico_mini":
       args.imdb_name = "hico2_mini_train"
@@ -182,6 +189,28 @@ if __name__ == '__main__':
   print('Using config:')
   pprint.pprint(cfg)
   np.random.seed(cfg.RNG_SEED)
+
+  log_dir = os.path.join('logs', args.dataset, args.net, f'run_{args.session}')
+  if args.use_tfboard:
+    if os.path.exists(log_dir):
+        import shutil
+        shutil.rmtree(log_dir)
+
+    from tensorboardX import SummaryWriter
+    logger = SummaryWriter(log_dir)
+
+  def cvt_json(raw: dict):
+      new = copy.deepcopy(raw)
+      for k, v in raw.items():
+          if isinstance(v, dict):
+              new[k] = cvt_json(v)
+          elif isinstance(v, np.ndarray):
+              new[k] = v.tolist()
+      return new
+  with open(f"{log_dir}/args.json", 'w+') as f:
+      json.dump(args.__dict__, f, indent=4)
+  with open(f"{log_dir}/cfg.json", 'w+') as f:
+      json.dump(cvt_json(cfg), f, indent=4)
 
   #torch.backends.cudnn.benchmark = True
   if torch.cuda.is_available() and not args.cuda:
@@ -293,7 +322,7 @@ if __name__ == '__main__':
   for key, value in dict(fasterRCNN.named_parameters()).items():
     if value.requires_grad:
       if 'bias' in key:
-        params += [{'params':[value],'lr':lr*(cfg.TRAIN.DOUBLE_BIAS + 1), \
+        params += [{'params':[value],'lr':lr*(cfg.TRAIN.DOUBLE_BIAS + 1),
                 'weight_decay': cfg.TRAIN.BIAS_DECAY and cfg.TRAIN.WEIGHT_DECAY or 0}]
       else:
         params += [{'params':[value],'lr':lr, 'weight_decay': cfg.TRAIN.WEIGHT_DECAY}]
@@ -327,14 +356,6 @@ if __name__ == '__main__':
 
   iters_per_epoch = int(train_size / args.batch_size)
 
-  if args.use_tfboard:
-    if os.path.exists('logs'):
-        import shutil
-        shutil.rmtree('logs')
-
-    from tensorboardX import SummaryWriter
-    logger = SummaryWriter("logs")
-
   for epoch in range(args.start_epoch, args.max_epochs + 1):
     # setting to train mode
     fasterRCNN.train()
@@ -350,26 +371,28 @@ if __name__ == '__main__':
         lr *= args.lr_decay_gamma
 
     data_iter = iter(dataloader)
-    for step in range(iters_per_epoch):
+    for step in tqdm(range(iters_per_epoch)):
+    # for step in range(iters_per_epoch):
       ld_start = time.time()
       data = next(data_iter)
-      im_data.data.resize_(data[0].size()).copy_(data[0])
-      dp_data.data.resize_(data[1].size()).copy_(data[1])
-      im_info.data.resize_(data[2].size()).copy_(data[2])
-      hboxes.data.resize_(data[3].size()).copy_(data[3])
-      oboxes.data.resize_(data[4].size()).copy_(data[4])
-      iboxes.data.resize_(data[5].size()).copy_(data[5])
-      pboxes.data.resize_(data[6].size()).copy_(data[6])
-      sboxes.data.resize_(data[7].size()).copy_(data[7])
-      hoi_classes.resize_(data[8].size()).copy_(data[8])
-      vrb_classes.resize_(data[9].size()).copy_(data[9])
-      bin_classes.resize_(data[10].size()).copy_(data[10])
-      hoi_masks.resize_(data[11].size()).copy_(data[11])
-      vrb_masks.resize_(data[12].size()).copy_(data[12])
-      spa_maps.data.resize_(data[13].size()).copy_(data[13])
-      pose_maps.data.resize_(data[14].size()).copy_(data[14])
-      obj_vecs.data.resize_(data[15].size()).copy_(data[15])
-      num_hois.data.resize_(data[16].size()).copy_(data[16])
+      with torch.no_grad():
+        im_data.resize_(data[0].size()).copy_(data[0])
+        dp_data.resize_(data[1].size()).copy_(data[1])
+        im_info.resize_(data[2].size()).copy_(data[2])
+        hboxes.resize_(data[3].size()).copy_(data[3])
+        oboxes.resize_(data[4].size()).copy_(data[4])
+        iboxes.resize_(data[5].size()).copy_(data[5])
+        pboxes.resize_(data[6].size()).copy_(data[6])
+        sboxes.resize_(data[7].size()).copy_(data[7])
+        hoi_classes.resize_(data[8].size()).copy_(data[8])
+        vrb_classes.resize_(data[9].size()).copy_(data[9])
+        bin_classes.resize_(data[10].size()).copy_(data[10])
+        hoi_masks.resize_(data[11].size()).copy_(data[11])
+        vrb_masks.resize_(data[12].size()).copy_(data[12])
+        spa_maps.resize_(data[13].size()).copy_(data[13])
+        pose_maps.resize_(data[14].size()).copy_(data[14])
+        obj_vecs.resize_(data[15].size()).copy_(data[15])
+        num_hois.resize_(data[16].size()).copy_(data[16])
       ld_end = time.time()
       ld_time += (ld_end-ld_start)
 
@@ -415,7 +438,7 @@ if __name__ == '__main__':
         nNeg = torch.sum(bin_classes[:, :, 1]).item()
         nPos = bin_classes.shape[1] - nNeg
 
-        print("[session %d][epoch %2d][iter %4d/%4d] loss: %.4f, lr: %.2e" \
+        print("[session %s][epoch %2d][iter %4d/%4d] loss: %.4f, lr: %.2e" \
                                 % (args.session, epoch, step, iters_per_epoch, loss_temp, lr))
         print("loss_cls: %.4f, loss_bin: %.4f" % (loss_cls, loss_bin))
         print("\t\t\tfg/bg=(%d/%d), time cost: %f" % (nPos, nNeg, end-start))
@@ -426,7 +449,8 @@ if __name__ == '__main__':
             'loss_bin': loss_bin_temp,
             'loss_cls': loss_cls_temp
           }
-          logger.add_scalars("logs_s_{}/losses".format(args.session), info, (epoch - 1) * iters_per_epoch + step)
+          logger.add_scalars(f"logs/res101/run{args.session}/losses", info, (epoch - 1) * iters_per_epoch + step)
+          logger.flush()
 
         loss_temp = 0
         loss_cls_temp = 0

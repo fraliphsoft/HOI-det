@@ -8,8 +8,8 @@ import argparse
 import matplotlib
 import matplotlib.pyplot as plt
 
-DATA_ROOT = r'data/vcoco/images/test/'
-OUTPUT = r'output/vcoco_full/all_hoi_detections.pkl'
+DATA_ROOT = './data/vcoco/images/test/'
+OUTPUT = 'output/vcoco_full/base_cb_sb_lc_gc_bpa_1_18_10051_pretrained.pth/all_hoi_detections.pkl'
 # obj_list_path = 'data/vcoco/object_index.json'
 
 def parse_args():
@@ -20,6 +20,8 @@ def parse_args():
   parser.add_argument('--im_id',
                       help='image id you want to test',
                       default='185197', type=int)
+  parser.add_argument('--data_root',
+                      default='data/vcoco', type=str)
   parser.add_argument('--show_category',
                       help='whether to show category of objects',
                       default=True)
@@ -80,8 +82,8 @@ def load_objects(object2index_path):
 def show_img(im_id, show_category=False):
     image_template = 'COCO_val2014_%s.jpg'
 
-    with open(OUTPUT) as f:
-        output = pickle.load(f)
+    with open(OUTPUT, 'rb') as f:
+        output = pickle.load(f, encoding='iso-8859-1')
 
     for image_info in output:
         if im_id == image_info['image_id']:
