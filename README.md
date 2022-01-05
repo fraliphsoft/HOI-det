@@ -1,5 +1,17 @@
 ## Instance of Interest Detection
 
+This repo is code for "Human Object Interaction Detection via Multi-level Conditioned Network" (ICMR'20).
+
+<b>Note</b> that the 'master' branch is only in support of python 2.7 + pytorch 0.4.0.
+If latest runtime environment is required, please checkout to 'pytorch1.x' branch (varified by python 3.8 + pytorch 1.9.0 + cuda 11.1):
+
+```
+git clone https://github.com/fraliphsoft/HOI-det.git -b pytorch1.x
+or
+git clone https://github.com/fraliphsoft/HOI-det.git
+git checkout pytorch1.x
+```
+
 ## Requirements
 backports.functools-lru-cache==1.6.1
 certifi==2019.11.28
