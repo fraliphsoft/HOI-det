@@ -9,6 +9,7 @@ If latest runtime environment is required, please checkout to 'pytorch1.x' branc
 git clone https://github.com/fraliphsoft/HOI-det.git -b pytorch1.x
 or
 git clone https://github.com/fraliphsoft/HOI-det.git
+cd HOI-det
 git checkout pytorch1.x
 ```
 
