@@ -62,7 +62,7 @@ def parse_args():
                       default="weights")
   parser.add_argument('--pth', dest='pth',
                       help='directory to load models',
-                      default="base_cb_sb_lc_gc_bpa_2022-01-04-02-50-32_18_10051.pth")
+                      default="base_cb_sb_lc_gc_bpa_1_18_10051.pth")
   parser.add_argument('--output_dir', dest='output_dir',
                       help='directory to load images for demo',
                       default="output")

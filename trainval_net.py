@@ -375,6 +375,7 @@ if __name__ == '__main__':
     # for step in range(iters_per_epoch):
       ld_start = time.time()
       data = next(data_iter)
+      # continue
       with torch.no_grad():
         im_data.resize_(data[0].size()).copy_(data[0])
         dp_data.resize_(data[1].size()).copy_(data[1])

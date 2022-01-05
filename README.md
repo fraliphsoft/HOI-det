@@ -97,6 +97,8 @@ cp anno.mat anno_full.mat
 cp anno_bbox.mat anno_bbox_full.mat
 ```
 
+note that there are dirty data in hico datasets with incorrect rotated images, which lead to failure when fusing the image and some preprocessed data because of different tensor shape. So we pick up these image and rotate them. For train set, see lines 77-86 and 117-120  in `/lib/roi_data_layer/minibatch.py`, and lines 70-77 in `/lib/roi_data_layer/roibatchLoader.py`. For test set, see lines 282-295, 307-310 and 316-319 in `/test_net_hico.py`.
+
 #### 2. Calculate Human Body Part Regions
 
 We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './WSHP', you can run it following these steps:

@@ -67,6 +67,14 @@ class roibatchLoader(data.Dataset):
     # here we set the anchor index to the last one
     # sample in this group
     minibatch_db = [self._roidb[index_ratio]]
+    # check the images which has been rotated error
+    # from imageio import imread
+    # im = imread(minibatch_db[0]['image'])
+    # dp = np.load(minibatch_db[0]['depth'])
+    # if im.shape[:2] != dp.shape[:2]:
+    #     a = minibatch_db[0]["image"]
+    #     print(f'{minibatch_db[0]["image"]}: im.shape: {im.shape}, dp.shape: {dp.shape}')
+    # return dp
     blobs = get_minibatch(minibatch_db, self._num_classes)
     im_data = torch.from_numpy(blobs['image'])
     dp_data = torch.from_numpy(blobs['depth'])
