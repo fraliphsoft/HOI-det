@@ -320,15 +320,20 @@ if __name__ == '__main__':
           im_in = im_in[:, :, np.newaxis]
           im_in = np.concatenate((im_in, im_in, im_in), axis=2)
       im_in = im_in[:, :, ::-1]  # rgb -> bgr
-      # correct the rotate angle
-      if os.path.basename(im_file) in hico_test_error_list:
-          print("warn: rotate" + im_file + " to align preprocessed feature and image")
-          im_in = rotate_img(im_in, hico_test_error_list[os.path.basename(im_file)])
-      im_h = im_in.shape[0]
-      im_w = im_in.shape[1]
 
       dp_file = human_path_template % str(im_id).zfill(8)
       dp_in = np.load(dp_file)
+
+      # correct the rotate angle
+      if os.path.basename(im_file) in hico_test_error_list:
+          print("check " + im_file + " shape: +image.shape: " + str(im_in.shape) + ", depth.shape: " + str(dp_in.shape))
+          if im_in.shape[:2] != dp_in.shape[:2]:
+              print("warn: rotate " + im_file + " to align preprocessed feature and image")
+              im_in = rotate_img(im_in, hico_test_error_list[os.path.basename(im_file)])
+              print("rotated shapes: image.shape: " + str(im_in.shape) + ", depth.shape: " + str(dp_in.shape))
+
+      im_h = im_in.shape[0]
+      im_w = im_in.shape[1]
       # check the images which has been rotated error
       # if im_in.shape[:2] != dp_in.shape[:2]:
       #     print(f'{im_file}: im_in.shape: {im_in.shape}, dp_in.shape: {dp_in.shape}')
