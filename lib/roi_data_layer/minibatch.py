@@ -116,8 +116,11 @@ def _get_image_blob(roidb, scale_inds):
 
     # correct the rotate angle
     if os.path.basename(roidb[i]['image']) in hico_train_error_list:
-      print(f"warn: rotate {roidb[i]['image']} to align preprocessed feature and image")
-      im = rotate_img(im, hico_train_error_list[os.path.basename(roidb[i]['image'])])
+      print(f"check {roidb[i]['image']} shapes: image.shape: {im.shape}, depth.shape: {dp.shape}")
+      if im.shape[:2] != dp.shape[:2]:
+        print(f"warn: rotate {roidb[i]['image']} to align preprocessed feature and image")
+        im = rotate_img(im, hico_train_error_list[os.path.basename(roidb[i]['image'])])
+        print(f'rotated shapes: image.shape: {im.shape}, depth.shape: {dp.shape}')
 
     if roidb[i]['flipped']:
       im = im[:, ::-1, :]
