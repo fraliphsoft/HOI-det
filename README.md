@@ -177,7 +177,7 @@ ResNet101:
 <br>
 	[Zenodo](https://doi.org/10.5281/zenodo.4513878): https://doi.org/10.5281/zenodo.4513878
 
-Collection of data resources: https://zenodo.org/record/5823557
+Collection of data resources above: https://zenodo.org/record/5823557
 
 ## Citation
 
