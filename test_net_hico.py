@@ -164,7 +164,7 @@ if __name__ == '__main__':
           HICO = pickle.load(f, encoding='iso-8859-1')
       generate_HICO_detection(HICO, output_dir, 1.0, 0.0)
       os.chdir('eval_hico')
-      os.system('matlab -nodesktop -nosplash -r "Generate_detection ' + '../output/hico_full' + '/;quit;"')
+      os.system('matlab -nodesktop -nosplash -r "Generate_detection ' + '../output/hico_full/' + args.pth + '/;quit;"')
       exit(0)
 
   print('Loading object detections ...')
@@ -509,7 +509,7 @@ if __name__ == '__main__':
 
   generate_HICO_detection(all_results, output_dir, 1.0, 0.0)
   os.chdir('eval_hico')
-  os.system('matlab -nodesktop -nosplash -r "Generate_detection ' + '../output/hico_full' + '/;quit;"')
+  os.system('matlab -nodesktop -nosplash -r "Generate_detection ' + '../output/hico_full/' + args.pth + '/;quit;"')
   os.chdir('..')
 
   print('Saving results ...')
