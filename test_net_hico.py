@@ -42,6 +42,7 @@ from datasets.hico2 import hico2
 from datasets.hico2 import refine_human_box_with_skeleton
 from datasets.pose_map import est_part_boxes, gen_part_boxes, gen_part_boxes1
 import pdb
+from tqdm import tqdm
 
 try:
     xrange          # Python 2
@@ -292,20 +293,46 @@ if __name__ == '__main__':
   all_results = {}
   image_path_template = 'data/hico/images/test2015/HICO_test2015_%s.jpg'
   human_path_template = 'data/hico/humans/test2015/HICO_test2015_%s.npy'
-  for i, im_id in enumerate(det_db):
-      print('test [%d/%d]' % (i + 1, num_images))
+  hico_test_error_list = {
+      'HICO_test2015_00003183.jpg': 1,
+      'HICO_test2015_00007684.jpg': 0,
+      'HICO_test2015_00008435.jpg': 0,
+      'HICO_test2015_00008817.jpg': 0
+  }
+
+
+  def rotate_img(img, dim):
+      img = img.transpose(1, 0, 2)
+      if dim == 0:
+          img = img[::-1, :, :]
+      elif dim == 1:
+          img = img[:, ::-1, :]
+      return img
+
+
+  for i, im_id in tqdm(enumerate(det_db), total=num_images):
+      # if i < 3180 or (3184 < i < 7682) or (7686 < i < 8430) or (8438 < i < 8813) or 8820 < i:
+      #     continue
+      # print('test [%d/%d]' % (i + 1, num_images))
       im_file = image_path_template % str(im_id).zfill(8)
       im_in = np.array(imread(im_file))
       if len(im_in.shape) == 2:
           im_in = im_in[:, :, np.newaxis]
           im_in = np.concatenate((im_in, im_in, im_in), axis=2)
-      im_in = im_in[:, :, ::-1]     # rgb -> bgr
+      im_in = im_in[:, :, ::-1]  # rgb -> bgr
+      # correct the rotate angle
+      if os.path.basename(im_file) in hico_test_error_list:
+          print("warn: rotate" + im_file + " to align preprocessed feature and image")
+          im_in = rotate_img(im_in, hico_test_error_list[os.path.basename(im_file)])
       im_h = im_in.shape[0]
       im_w = im_in.shape[1]
 
       dp_file = human_path_template % str(im_id).zfill(8)
       dp_in = np.load(dp_file)
-
+      # check the images which has been rotated error
+      # if im_in.shape[:2] != dp_in.shape[:2]:
+      #     print(f'{im_file}: im_in.shape: {im_in.shape}, dp_in.shape: {dp_in.shape}')
+      # continue
       im_blobs, dp_blobs, im_scales = _get_image_blob(im_in, dp_in)
       im_results = []
 

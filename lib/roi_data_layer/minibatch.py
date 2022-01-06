@@ -10,6 +10,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import pickle
 import numpy as np
 import numpy.random as npr
@@ -18,8 +19,6 @@ from model.utils.config import cfg
 from model.utils.blob import prep_im_for_blob, im_list_to_blob
 import pdb
 from random import randint
-
-
 
 
 def get_minibatch(roidb, num_classes):
@@ -74,6 +73,24 @@ def get_minibatch(roidb, num_classes):
 
   return blobs
 
+hico_train_error_list = {
+    'HICO_train2015_00018679.jpg': 1,
+    'HICO_train2015_00019135.jpg': 0,
+    'HICO_train2015_00027301.jpg': 1,
+    'HICO_train2015_00028302.jpg': 0,
+    'HICO_train2015_00032020.jpg': 0,
+}
+
+
+def rotate_img(img, dim):
+    img = img.transpose(1, 0, 2)
+    if dim == 0:
+        img = img[::-1, :, :]
+    elif dim == 1:
+        img = img[:, ::-1, :]
+    return img
+
+
 def _get_image_blob(roidb, scale_inds):
   """Builds an input blob from the images in the roidb at the specified
   scales.
@@ -95,6 +112,11 @@ def _get_image_blob(roidb, scale_inds):
     # flip the channel, since the original one using cv2
     # rgb -> bgr
     im = im[:,:,::-1]
+
+    # correct the rotate angle
+    if os.path.basename(roidb[i]['image']) in hico_train_error_list:
+      print("warn: rotate:" + roidb[i]['image'] + " to align preprocessed feature and image")
+      im = rotate_img(im, hico_train_error_list[os.path.basename(roidb[i]['image'])])
 
     if roidb[i]['flipped']:
       im = im[:, ::-1, :]
