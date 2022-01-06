@@ -87,7 +87,6 @@ You can download all required first, and then follow the setps below.
 </b>
 ---
 
-
 #### 1. Download Datasets
 
 We perform our experiments in 'vcoco' and 'hico(v2016)' dataset. We follow the setting of [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network) as our original dataset, and then use [WSHP](https://github.com/MVIG-SJTU/WSHP) to extract human body part regions in hico and vcoco dataset respectively.
@@ -228,6 +227,7 @@ ResNet101:
 <br>
 	[Zenodo](https://doi.org/10.5281/zenodo.4513878): https://doi.org/10.5281/zenodo.4513878
 
+---
 Collection of data resources above: https://zenodo.org/record/5823557
 
 ## Citation
