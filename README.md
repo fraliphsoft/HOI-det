@@ -149,12 +149,16 @@ You can train you own model by running the following script:
 
 ```python
 python trainval_net.py −−dataset hico_full  --epochs 6 --lr_decay_step 1
+# resume train
+# python trainval_net.py −−dataset hico_full  --epochs 6 --lr_decay_step 1 --resume --checksession {session str like "2022-01-06-03-06-27"} --checkepoch {epoch}
 ```
 
 or
 
 ```python
 python trainval_net.py −−dataset vcoco_full  --epochs 18 --lr_decay_step 3
+# resume train
+# python trainval_net.py −−dataset vcoco_full  --epochs 18 --lr_decay_step 3 --resume --checksession {session str like "2022-01-06-03-06-27"} --checkepoch {epoch}
 ```
 
 #### Test

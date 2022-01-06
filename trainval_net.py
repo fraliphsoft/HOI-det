@@ -35,6 +35,7 @@ from model.faster_rcnn.resnet import resnet
 from tqdm import tqdm
 import json
 import copy
+from tensorboardX import SummaryWriter
 
 
 def parse_args():
@@ -114,7 +115,8 @@ def parse_args():
                       default=1, type=int)
   parser.add_argument('--checkepoch', dest='checkepoch',
                       help='checkepoch to load model',
-                      default=6, type=int)
+                      # default='2022-01-06-03-06-27',
+                      type=str)
   parser.add_argument('--checkpoint', dest='checkpoint',
                       help='checkpoint to load model',
                       default=91451, type=int)
@@ -192,11 +194,9 @@ if __name__ == '__main__':
 
   log_dir = os.path.join('logs', args.dataset, args.net, f'run_{args.session}')
   if args.use_tfboard:
-    if os.path.exists(log_dir):
+    if not args.resume and os.path.exists(log_dir):
         import shutil
         shutil.rmtree(log_dir)
-
-    from tensorboardX import SummaryWriter
     logger = SummaryWriter(log_dir)
 
   def cvt_json(raw: dict):
