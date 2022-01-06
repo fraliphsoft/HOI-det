@@ -63,6 +63,16 @@ There are no restrictions on versions, you can download matlab from its official
 ```
 
 ## Prepare Data
+
+---
+<b>
+We have integrated everything of data files from different sources into a specific repository folders for easier access:
+https://zenodo.org/record/5823557
+You can download all required first, and then follow the setps below.
+</b>
+
+---
+
 #### 1. Download Datasets
 We perform our experiments in 'vcoco' and 'hico(v2016)' dataset. We follow the setting of [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network) as our original dataset, and then use [WSHP](https://github.com/MVIG-SJTU/WSHP) to extract human body part regions in hico and vcoco dataset respectively.
 Considering that the body part regions data is too large(>100GB for test and >500GB for training) while the code runs fast, we provide prepared dataset except human body part regions:
@@ -166,6 +176,8 @@ ResNet101:
 	[VT Server](https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/resnet101_caffe.pth): https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/resnet101_caffe.pth
 <br>
 	[Zenodo](https://doi.org/10.5281/zenodo.4513878): https://doi.org/10.5281/zenodo.4513878
+
+Collection of data resources: https://zenodo.org/record/5823557
 
 ## Citation
 
