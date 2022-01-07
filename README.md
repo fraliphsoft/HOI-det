@@ -135,8 +135,8 @@ You can download some pretrained models from:
 After that, you should extract them respectively in:
 
 - for WSHP: './WSHP/parsing_network/models/'
-- for hico: './weights/res101/hico_full/'
-- for vcoco: './weights/res101/vcoco_full/'
+- for hico: './weights/res101/hico_full/res101/hico_full/'
+- for vcoco: './weights/res101/vcoco_full/res101/vcoco_full/'
 
 Note: The pretrained model for vcoco provided here performs better than that in our paper, while we just increase some training epoches.
 
@@ -157,7 +157,7 @@ Before custom your own training progress, you have to download a pretrained weig
 You can train you own model by running the following script:  
 
 ```python
-python trainval_net.py −−dataset hico_full  --epochs 6 --lr_decay_step 1
+python trainval_net.py --dataset hico_full --epochs 6 --lr_decay_step 1
 # resume train
 # python trainval_net.py −−dataset hico_full  --epochs 6 --lr_decay_step 1 --resume --checksession {session str like "2022-01-06-03-06-27"} --checkepoch {epoch}
 ```
@@ -165,7 +165,7 @@ python trainval_net.py −−dataset hico_full  --epochs 6 --lr_decay_step 1
 or
 
 ```python
-python trainval_net.py −−dataset vcoco_full  --epochs 18 --lr_decay_step 3
+python trainval_net.py --dataset vcoco_full --epochs 18 --lr_decay_step 3
 # resume train
 # python trainval_net.py −−dataset vcoco_full  --epochs 18 --lr_decay_step 3 --resume --checksession {session str like "2022-01-06-03-06-27"} --checkepoch {epoch}
 ```
