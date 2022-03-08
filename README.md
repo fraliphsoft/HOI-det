@@ -132,7 +132,6 @@ We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './W
             <th>'vcoco test'</th>
         </tr>
     </thead>
-    
     <tbody>
         <tr>
             <td>generate_files.sh</td>
