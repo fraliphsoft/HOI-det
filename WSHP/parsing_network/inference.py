@@ -22,9 +22,17 @@ import pdb
 
 IMG_MEAN = np.array((104.00698793,116.66876762,122.67891434), dtype=np.float32)
     
+
+    
+    
+    
+dataset_name = 'hico'  # 'hico' or 'vcoco'
+phrase = 'train'  # 'train' or 'test'
+
 NUM_CLASSES = 7
 MODEL = './models/final_model/model.ckpt-19315'
 DATA_LIST = './filename.txt'
+
 SAVE_DIR = './output/'
 
 # setting for hico-test
