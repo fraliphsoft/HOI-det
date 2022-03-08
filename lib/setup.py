@@ -56,7 +56,7 @@ def get_extensions():
             'pycocotools._mask',
             sources=['pycocotools/maskApi.c', 'pycocotools/_mask.pyx'],
             include_dirs = [np.get_include(), 'pycocotools'],
-            extra_compile_args=['-Wno-cpp', '-Wno-unused-function', '-std=c99'],
+            extra_compile_args=['-Wno-cpp', '-Wno-unused-function', '-std=c99', '-fpermissive'],
         ),
         extension(
             "model.utils.cython_bbox",
