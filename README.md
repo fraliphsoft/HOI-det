@@ -86,13 +86,52 @@ We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './W
 1. # download pretrained-model for WSHP and then extract to './WSHP/parsing_network/models/'.
 2. cd ./WSHP/parsing_network/
 3. rm filename.txt
-4. # config the dataset path in 'generate_flist.sh' (in line 3 - 6)
+4. # config the dataset path in 'generate_flist.sh' (in line 3 - 7) and 'inference.py' (in line 29 - 42), details are shown in the following table.
 5. chmod +x generate_flist.sh
 6. sh generate_flist.sh
-7. # config the dataset path in 'inference.py' (in line 30 - 33)
-8. python inference.py
-9. # move the output from './WSHP/parsing_network/output/' to './data/hico/humans/' or './data/vcoco/humans/'
+7. python inference.py
 ```
+
+<table>
+    <thead>
+        <tr>
+	    <th colspan="2">Configurations</th>
+            <th>'hico train'</th>
+            <th>'hico test'</th>
+            <th>'vcoco train'</th>
+            <th>'vcoco test'</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>generate_files.sh</td>
+            <td>Line 4</td>
+            <td>path=../../data/hico/ images/train2015/</td>
+            <td>path=../../data/hico/ images/test2015/</td>
+            <td>path=../../data/vcoco/ images/trainval/</td>
+            <td>path=../../data/vcoco/ images/test/</td>
+        </tr>
+        <tr>
+            <td rowspan=3>inference.py</td>
+            <td>Line 29</td>
+            <td colspan=2>dataset_name = 'hico'</td>
+            <td colspan=2>dataset_name = 'vcoco'</td>
+        </tr>
+        <tr>
+            <td>Line 30</td>
+            <td>phrase = 'train'</td>
+            <td>phrase = 'test'</td>
+            <td>phrase = 'train'</td>
+            <td>phrase = 'test'</td>
+        </tr>
+        <tr>
+            <td>Line 39</td>
+            <td colspan=2>DATASET_PATH = f"../../data/hico/images/{phrase+'2015'}/"</td>
+            <td>DATASET_PATH = f"../../data/hico/ images/{phrase+'val'}/"</td>
+            <td>DATASET_PATH = f"../../data/hico/ images/{phrase}/"</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Pretrained Model
 You can download some pretrained models from:
