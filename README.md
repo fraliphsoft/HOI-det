@@ -125,7 +125,7 @@ We provide the fine-tuned [WSHP](https://github.com/MVIG-SJTU/WSHP) code in './W
 <table>
     <thead>
         <tr>
-			<th colspan="2">Configurations</th>
+	    <th colspan="2">Configurations</th>
             <th>'hico train'</th>
             <th>'hico test'</th>
             <th>'vcoco train'</th>
