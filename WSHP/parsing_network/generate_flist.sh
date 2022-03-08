@@ -1,4 +1,5 @@
 #!/bin/bash
+rm filename.txt
 # get all filename in specified path
 path=../../data/hico/images/test2015/    # for hico-test
 # path=../../data/hico/images/train2015/ # for hico-train
