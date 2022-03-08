@@ -31,7 +31,7 @@ phrase = 'train'  # 'train' or 'test'
 
 NUM_CLASSES = 7
 MODEL = './models/final_model/model.ckpt-19315'
-DATA_LIST = f'./filename_hico_train.txt'
+DATA_LIST = f'./filename.txt'
 # SAVE_DIR = f"output/"
 SAVE_DIR = f"../../data/{dataset_name}/humans/{phrase+'2015'}/"
 
