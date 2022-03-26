@@ -10,6 +10,7 @@ We validate this branch with the following environment:
 (4) CUDA 11.1 and cuDNN 8.0.5.
 (5) Python 3.8.12, torch=1.9.0, tensorflow=2.6.0.
 (6) Matlab R2021b.
+(7) GCC >=5.0
 
 The installation process of this branch differs from that of 'master' branch (with python 2.7 and pytorch 0.4.0), and other scripts are consistant.
 
@@ -53,9 +54,32 @@ conda activate <env-name>
 ```
 pip install -r requirements.txt
 # for cuda environment problems, you maybe need to install spercific version of tensorflow or torch, using the command below
-# pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
-# conda install tensorflow-gpu==2.6.0
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+conda install tensorflow-gpu==2.6.0
 
+```
+
+Make sure that your gcc version is >= 5.0:
+```
+# Check the current version of gcc
+gcc -v
+
+# Install gcc-5 and validate the installation
+sudo apt-get install gcc-5 g++-5
+ls /usr/bin | grep gcc
+
+# Configure your current gcc
+# Here, x.x is the current version of gcc, and 100 is the customed priority
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-x.x 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-x.x 100
+
+# Configure the newly installed gcc-5
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 60
+
+# Switch to the gcc 5
+sudo update-alternatives --config gcc
+sudo update-alternatives --config g++
 ```
 
 #### Install Matlab
@@ -214,13 +238,13 @@ python trainval_net.py --dataset vcoco_full --epochs 18 --lr_decay_step 3
 Based on the pretrained model, you can predict all the images in the dataset by running the following script:
 
 ```python
-python test_net_hico.py
+python test_net_hico.py --pth base_cb_sb_lc_gc_bpa_[DATE]_[EPOCH]_91451.pth
 ```
 
 or
 
 ```python
-python test_net_vcoco.py
+python test_net_vcoco.py --pth base_cb_sb_lc_gc_bpa_[DATE]_[EPOCH]_10051.pth
 ```
 
 If you have already downloaded the pre-computed test results, the detection stage will be automaticly skipped, and the test results will be evaluated.
@@ -242,7 +266,7 @@ python demo_vcoco.py --im_id <int> --show_category <True | False>
 
 ## Link
 
-- We construct our code based on [Faster-RCNN](https://github.com/jwyang/faster-rcnn.pytorch)(https://github.com/jwyang/faster-rcnn.pytorch), and follow [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network)(https://github.com/jwyang/faster-rcnn.pytorch) to build our evaluation code.
+- We construct our code based on [Faster-RCNN](https://github.com/jwyang/faster-rcnn.pytorch)(https://github.com/jwyang/faster-rcnn.pytorch), and follow [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network)(https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network) to build our evaluation code.
 - We use [WSHP](https://github.com/MVIG-SJTU/WSHP)(https://github.com/MVIG-SJTU/WSHP) to parse human body part regions, and use its pre-trained weights [here](https://doi.org/10.5281/zenodo.4506593)(https://doi.org/10.5281/zenodo.4506593 or https://jbox.sjtu.edu.cn/l/hJjgjw).
 - We provide the two datasets we used in our experiments as:
   [hico](https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing): https://drive.google.com/file/d/1KFXWUt6lCvXGflpq6tvrfqtPES6VoPbk/view?usp=sharing
