@@ -87,6 +87,20 @@ sudo update-alternatives --config g++
 We adopt the implementation of evaluation functions in HICO dataset from [TIN](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network)(actually from [iCAN](https://github.com/vt-vl-lab/iCAN) or former), so matlab runtime environment is needed.
 There are no restrictions on versions, you can download matlab from its official website and install according to the tutorial.
 
+Note:
+If 'Parallel Computing Toolbox' is not available in your matlab license, some changes should be made to run the evaluation code of HICO-Det:
+- in 'Generate_detection.m' file:
+delete line 285: delete(gcp('nocreate'))
+- in 'ecal_one.m' file:
+1. delete lines 119-123:
+	if ~exist('pool_size','var')
+		poolobj = parpool();
+	else
+		poolobj = parpool(pool_size);
+	end  
+2. alter line 132: parfor -> for
+3. delete line 192: delete(poolobj);
+
 #### Install Libraries
 
 ```
