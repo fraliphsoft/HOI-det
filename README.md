@@ -90,16 +90,26 @@ There are no restrictions on versions, you can download matlab from its official
 Note:
 If 'Parallel Computing Toolbox' is not available in your matlab license, some changes should be made to run the evaluation code of HICO-Det:
 - in 'Generate_detection.m' file:
+
+```
 delete line 285: delete(gcp('nocreate'))
+```
+
 - in 'ecal_one.m' file:
+
+```
 1. delete lines 119-123:
+
 	if ~exist('pool_size','var')
 		poolobj = parpool();
 	else
 		poolobj = parpool(pool_size);
-	end  
+	end
+
 2. alter line 132: parfor -> for
+
 3. delete line 192: delete(poolobj);
+```
 
 #### Install Libraries
 
