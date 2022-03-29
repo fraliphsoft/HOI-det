@@ -9,7 +9,9 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 DATA_ROOT = './data/vcoco/images/test/'
-OUTPUT = 'output/vcoco_full/base_cb_sb_lc_gc_bpa_1_18_10051_pretrained.pth/all_hoi_detections.pkl'
+DATE = '1'
+EPOCH = '18'
+OUTPUT = 'output/vcoco_full/base_cb_sb_lc_gc_bpa_{}_{}_10051_pretrained.pth/all_hoi_detections.pkl'.format(DATE, EPOCH)
 # obj_list_path = 'data/vcoco/object_index.json'
 
 def parse_args():
