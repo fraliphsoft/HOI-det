@@ -99,15 +99,12 @@ delete line 285: delete(gcp('nocreate'))
 
 ```
 1. delete lines 119-123:
-
 	if ~exist('pool_size','var')
 		poolobj = parpool();
 	else
 		poolobj = parpool(pool_size);
 	end
-
 2. alter line 132: parfor -> for
-
 3. delete line 192: delete(poolobj);
 ```
 
